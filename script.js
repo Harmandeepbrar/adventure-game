@@ -4,7 +4,7 @@ function renderQuestion(){
     const question = document.getElementById("question");
     const answers = document.getElementById("answers")
 
-    answers.innerHTML ="";
+    answers.innerHTML = "";
     
     if (currentState === "start") {
 
@@ -17,22 +17,7 @@ function renderQuestion(){
     }
 
 
-    function addAnswerButton(text, nextState) {
-
-    const btn = document.createElement("button");
-
-    btn.textContent = text;
-
-    btn.addEventListener("click", () => {
-
-        currentState = nextState;   // updates state
-
-        renderQuestion();           // refreshes story (VERY IMPORTANT)
-    });
-
-    document.getElementById("answers").appendChild(btn);
-}
-
+    
     //Sales associate Path
     
     //decision 1
@@ -48,11 +33,11 @@ function renderQuestion(){
     else if (currentState === "sales_associate_2") {
 
     question.textContent = "A customer cannot find a product.";
-    addAnswerButton("Help the customer find it", "sales_associate_2_end");
-    addAnswerButton("Tell them to ask someone else", "sales_associate_2_end");
+    addAnswerButton("Help the customer find it", "sales_associate_end");
+    addAnswerButton("Tell them to ask someone else", "sales_associate_end");
     }
 
-    else if (currentState === "sales_associate_2_end") {
+    else if (currentState === "sales_associate_end") {
 
     question.textContent = "Your Sales Associate shift is over.";
 }
@@ -102,7 +87,22 @@ function renderQuestion(){
 
     question.textContent = "Your Stock Associate shift is over.";
     }
-
+    addAnswerButton("Restart Game", "start");
 }
 
 
+function addAnswerButton(text, nextState) {
+
+    const btn = document.createElement("button");
+
+    btn.textContent = text;
+
+    btn.addEventListener("click", () => {
+
+        currentState = nextState;
+        renderQuestion();
+    });
+    document.getElementById("answers").appendChild(btn);
+}
+
+renderQuestion()
