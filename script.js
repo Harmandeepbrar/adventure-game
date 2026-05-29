@@ -4,7 +4,7 @@ function renderQuestion(){
     const question = document.getElementById("question");
     const answers = document.getElementById("answers")
 
-    answers.innerHTML = "";
+    answers.innerHTML ="";
     
     if (currentState === "start") {
 
@@ -16,6 +16,22 @@ function renderQuestion(){
 
     }
 
+
+    function addAnswerButton(text, nextState) {
+
+    const btn = document.createElement("button");
+
+    btn.textContent = text;
+
+    btn.addEventListener("click", () => {
+
+        currentState = nextState;   // updates state
+
+        renderQuestion();           // refreshes story (VERY IMPORTANT)
+    });
+
+    document.getElementById("answers").appendChild(btn);
+}
 
     //Sales associate Path
     
@@ -88,3 +104,5 @@ function renderQuestion(){
     }
 
 }
+
+
